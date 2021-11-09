@@ -22,11 +22,12 @@ jobs:
     
     - name: Setup conan 
       run: |
-        python -m venv venv
+        # python -m venv venv
         # source venv/bin/activate
         pip install conan
         mkdir build
         cd build
+        conan user
         conan install ..
  
     - name: Configure
