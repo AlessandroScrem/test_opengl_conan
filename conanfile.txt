@@ -1,0 +1,6 @@
+[requires]
+glfw/3.3.4
+glm/0.9.9.5
+
+ [generators]
+cmake_find_package
