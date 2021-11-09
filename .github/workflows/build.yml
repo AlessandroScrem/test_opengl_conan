@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Setup python
+    - name: Setup python  & conan  
       uses: actions/setup-python@v2
       run: |
         python -m venv venv
@@ -35,10 +35,6 @@ jobs:
       run: |
         cmake --build build --config Debug
 
-    - name: Test
-      run: |
-        cd build
-        ctest -C Debug --output-on-failure --verbose
 
 
  
