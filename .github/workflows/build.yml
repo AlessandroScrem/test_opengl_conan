@@ -13,7 +13,7 @@ jobs:
         include:
           - os: ubuntu-latest
           
-            CONAN-INSTALL_: 'conan install .. -s compiler.libcxx=libstdc++11'
+            CONAN-INSTALL_: 'conan install .. --build=missing -s compiler.libcxx=libstdc++11'
             CMAKE_CONFIG_:  'cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release'
             CMAKE_BUILD_:   'cmake --build .'
             
@@ -45,8 +45,6 @@ jobs:
         source venv/bin/activate
         pip3 install wheel setuptools
         pip3 install conan --upgrade
-        conan profile new default --detect
-        conan profile update settings.compiler.libcxx=libstdc++11 default
         mkdir build
         cd build
         ${{matrix.CONAN-INSTALL_}}
