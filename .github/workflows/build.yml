@@ -45,9 +45,10 @@ jobs:
         source venv/bin/activate
         pip3 install wheel setuptools
         pip3 install conan --upgrade
+        conan profile new default --detect
+        conan profile update settings.compiler.libcxx=libstdc++11 default
         mkdir build
         cd build
-        conan profile update settings.compiler.libcxx=libstdc++11 default 
         ${{matrix.CONAN-INSTALL_}}
  
     - name: Configure
