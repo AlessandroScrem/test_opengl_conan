@@ -8,15 +8,33 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+          
+            CONAN-INSTALL_: 'conan install .. -s compiler.libcxx=libstdc++11'
+            CMAKE_CONFIG_:  'cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release'
+            CMAKE_BUILD_:   'cmake --build .'
+            
+          - os:  macos-latest
+          
+            CONAN-INSTALL_: 'conan install .. --build=missing -s compiler.libcxx=libstdc++'
+            CMAKE_CONFIG_:  'cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release'
+            CMAKE_BUILD_:   'cmake --build .'
+
+          - os: windows-latest
+          
+            CONAN-INSTALL_: 'conan install ..'
+            CMAKE_CONFIG_:  'cmake .. -G "Visual Studio 16 2019"'
+            CMAKE_BUILD_:   'cmake --build . --config Release'
+
     defaults:
       run:
         shell: bash -l {0}
 
     steps:
     - uses: actions/checkout@v2
-    - uses: openrndr/setup-opengl@v1.1
 
     - name: Setup python 
       uses: actions/setup-python@v2
@@ -25,21 +43,18 @@ jobs:
       run: |
         python -m venv venv
         source venv/bin/activate
-        pip install conan
+        pip3 install wheel setuptools
+        pip3 install conan --upgrade
         mkdir build
         cd build
-        conan user
-        conan install ..
+        ${{matrix.CONAN-INSTALL_}}
  
     - name: Configure
       run: |
-        cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug
-
+        cd build
+        ${{matrix.CMAKE_CONFIG_}}
+        
     - name: Build
       run: |
-        cmake --build build --config Debug
-
-
-
- 
-         
+        cd build
+        ${{matrix.CMAKE_BUILD_}}
