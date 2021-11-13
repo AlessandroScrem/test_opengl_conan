@@ -16,7 +16,6 @@ jobs:
        
     - name: Setup conan 
       run: |
-        brew update
         brew install conan
 
     - name: Build
