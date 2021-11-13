@@ -1,0 +1,26 @@
+name: macOS
+
+on: [push]
+
+jobs:
+  build:
+  
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+       
+    - name: Setup conan 
+      run: |
+        brew install conan
+
+    - name: Build
+      run: |
+        mkdir build && cd build
+        conan install .. 
+        cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+        cmake --build .
