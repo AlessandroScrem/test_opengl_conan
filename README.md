@@ -9,13 +9,13 @@ C/C++ test demo using conan pakage manager https://conan.io/
 
 Install Conan:
 
-$ pip install conan
+    $ pip install conan
+    $ git clone https://github.com/AlessandroScrem/test_opengl_conan.git
+    $ cd test_opengl_conan
+    $ mkdir build && cd build
+    $ conan install ..
+    $ cmake ..
+    $ cmake --build 
 
-git clone https://github.com/AlessandroScrem/test_opengl_conan.git
-cd test_opengl_conan
-mkdir build && cd build
-conan install ..
-cmake ..
-cmake --build 
 
 
