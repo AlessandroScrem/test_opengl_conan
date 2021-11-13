@@ -19,8 +19,6 @@ jobs:
         sudo apt-get install freeglut3-dev        
     - name: Setup conan 
       run: |
-        python -m venv venv
-        source venv/bin/activate
         pip3 install wheel setuptools
         pip3 install conan --upgrade
 
