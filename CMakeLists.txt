@@ -24,8 +24,10 @@ target_include_directories(opengl_test_conan
 	 ${glm_INCLUDE_DIRS} 
 )
 
-target_link_libraries(opengl_test_conan  glfw::glfw glad)
+target_include_directories(opengl_test_conan PUBLIC ${OPENGL_INCLUDE_DIR})
 
+target_link_libraries(opengl_test_conan  glfw::glfw glad)
+target_link_libraries(opengl_test_conan ${OPENGL_gl_LIBRARY})
 
 
 
