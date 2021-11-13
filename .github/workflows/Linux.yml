@@ -30,4 +30,6 @@ jobs:
         cmake --build .
 
       -name: Test
-        ctest 
+       run: |
+        ctest
+      nam 
