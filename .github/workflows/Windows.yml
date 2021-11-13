@@ -1,12 +1,16 @@
-name: Linux
+name: Windows
 
 on: [push]
 
 jobs:
   build:
-
+  
+    defaults:
+      run:
+        shell: bash -l {0}
+        
     runs-on: windows-latest
-    
+   
     steps:
     - uses: actions/checkout@v1       
     - name: Setup conan 
