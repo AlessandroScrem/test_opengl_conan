@@ -24,5 +24,6 @@ jobs:
         conan install .. --build=missing -s compiler.libcxx=libstdc++11
     - name: Build
       run: |
+        cd build
         cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
         cmake --build .
