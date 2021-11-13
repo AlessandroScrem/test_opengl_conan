@@ -1,4 +1,6 @@
-
+[![Linux](https://github.com/AlessandroScrem/test_opengl_conan/actions/workflows/linux_.yml/badge.svg)](https://github.com/AlessandroScrem/test_opengl_conan/actions/workflows/linux_.yml)
+[![macOS](https://github.com/AlessandroScrem/test_opengl_conan/actions/workflows/macOS.yml/badge.svg)](https://github.com/AlessandroScrem/test_opengl_conan/actions/workflows/macOS.yml)
+[![Windows](https://github.com/AlessandroScrem/test_opengl_conan/actions/workflows/windows.yml/badge.svg)](https://github.com/AlessandroScrem/test_opengl_conan/actions/workflows/windows.yml)
 # test_opengl_conan
 
 C/C++ test demo using conan pakage manager https://conan.io/
