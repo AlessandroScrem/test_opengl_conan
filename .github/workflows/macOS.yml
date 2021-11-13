@@ -9,21 +9,21 @@ jobs:
       run:
         shell: bash -l {0}
 
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     
     steps:
     - uses: actions/checkout@v1
        
     - name: Setup conan 
       run: |
-        # python -m venv venv
-        # source venv/bin/activate
+        python -m venv venv
+        source venv/bin/activate
         pip3 install wheel setuptools
         pip3 install conan --upgrade
 
     - name: Build
       run: |
         mkdir build && cd build
-        conan install .. #--build=missing -s compiler.libcxx=libstdc++
+        conan install .. 
         cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
         cmake --build .
