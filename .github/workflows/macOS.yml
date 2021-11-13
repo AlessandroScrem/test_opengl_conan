@@ -1,4 +1,4 @@
-name: macOs
+name: macOS
 
 on: [push]
 
@@ -24,6 +24,6 @@ jobs:
     - name: Build
       run: |
         mkdir build && cd build
-        conan install .. 
+        conan install .. --build=missing -s compiler.libcxx=libstdc++
         cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
         cmake --build .
