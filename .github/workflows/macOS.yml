@@ -16,10 +16,8 @@ jobs:
        
     - name: Setup conan 
       run: |
-        python -m venv venv
-        source venv/bin/activate
-        pip3 install wheel setuptools
-        pip3 install conan --upgrade
+        brew update
+        brew install conan
 
     - name: Build
       run: |
