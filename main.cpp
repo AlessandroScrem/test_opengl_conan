@@ -3,6 +3,7 @@
 
 #include "shader_s.h"
 
+#include <string>
 #include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -12,8 +13,28 @@ void processInput(GLFWwindow *window);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-int main()
+bool getCmdOption(int argc, char* argv[], const std::string& option)
 {
+     for( int i = 0; i < argc; ++i)
+     {
+          std::string arg = argv[i];
+          if(0 == arg.find(option))
+          {
+               std::size_t found = arg.find_first_of(option);
+               return true;
+          }
+     }
+     return false;
+}
+
+
+
+int main(int argc, char* argv[])
+{
+	bool exit_for_test = false;
+	exit_for_test = getCmdOption(argc, argv, "-test");
+		
+
     // glfw: initialize and configure
     // ------------------------------
     glfwInit();
@@ -101,6 +122,11 @@ int main()
         // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);
         glfwPollEvents();
+        
+        // run once for test
+        if( exit_for_test) {
+			break;
+		}
     }
 
     // optional: de-allocate all resources once they've outlived their purpose:
