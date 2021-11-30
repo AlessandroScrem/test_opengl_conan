@@ -24,14 +24,14 @@ set(GLAD_SOURCES glad.c )
 set_source_files_properties(${GLAD_SOURCES} PROPERTIES LANGUAGE CXX )
 add_library(glad STATIC ${GLAD_SOURCES})
 
-target_include_directories(glad PRIVATE include)
+target_include_directories(glad PUBLIC include)
 
 add_executable(opengl_test_conan main.cpp)
 
-target_include_directories(opengl_test_conan 
-	PRIVATE 
-	 include  
-)
+#target_include_directories(opengl_test_conan 
+#	PRIVATE 
+#	 include  
+#)
 
 target_link_libraries(opengl_test_conan  CONAN_PKG::glfw CONAN_PKG::glm glad)
 
