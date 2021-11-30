@@ -4,21 +4,16 @@ on: [push]
 
 jobs:
   build:
-  
-    defaults:
-      run:
-        shell: bash -l {0}
         
     runs-on: windows-latest
    
     steps:
-    - uses: actions/checkout@v1 
-    
+    - uses: actions/checkout@v1     
     - name: install conan
-      run: pipx install conan
-    
-    - name: Build
-      run: |
-        mkdir build && cd build
-        cmake .. -G "Visual Studio 16 2019"
-        cmake --build . --config Release
+      run: pipx install conan 
+    - name: configure
+      run: mkdir build && cd build && cmake ..
+    - name: build
+      run: cmake --build . --config Release
+    - name: test
+      run: cd build && ctest
