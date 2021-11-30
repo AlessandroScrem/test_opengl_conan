@@ -23,6 +23,4 @@ jobs:
       run: cmake --build build --config Debug
 
     - name: Test
-      run: |
-        cd build
-        ctest -C Debug --output-on-failure --verbose 
+    #  run: cd build && ctest -C Debug --output-on-failure --verbose 
