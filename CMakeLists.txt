@@ -1,14 +1,24 @@
 cmake_minimum_required(VERSION 3.5)
 project(opengl_test_conan CXX)
 
-set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR} ${CMAKE_MODULE_PATH})
-
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(OpenGL REQUIRED)
-find_package(glfw3 REQUIRED)
-find_package(glm REQUIRED)
+# Download automatically, you can also just copy the conan.cmake file
+if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
+   file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
+                  "${CMAKE_BINARY_DIR}/conan.cmake")
+endif()
+
+include(${CMAKE_BINARY_DIR}/conan.cmake)
+
+conan_cmake_run(REQUIRES 
+		  glfw/3.3.4
+		  glm/0.9.9.5		
+                BASIC_SETUP 
+		CMAKE_TARGETS)
+
 
 set(GLAD_SOURCES glad.c )
 set_source_files_properties(${GLAD_SOURCES} PROPERTIES LANGUAGE CXX )
@@ -21,10 +31,9 @@ add_executable(opengl_test_conan main.cpp)
 target_include_directories(opengl_test_conan 
 	PRIVATE 
 	 include  
-	 ${glm_INCLUDE_DIRS} 
 )
 
-target_link_libraries(opengl_test_conan  glfw::glfw glad)
+target_link_libraries(opengl_test_conan  CONAN_PKG::glfw CONAN_PKG::glm glad)
 
 enable_testing()
 
