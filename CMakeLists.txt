@@ -39,7 +39,7 @@ enable_testing()
 
 add_test(
   NAME opengl_test_conan
-  COMMAND $<TARGET_FILE:opengl_test_conan>
+  COMMAND $<TARGET_FILE:opengl_test_conan> -test
   )
 
 
